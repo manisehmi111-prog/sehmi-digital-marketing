@@ -1,0 +1,53 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" width="320" height="64" fill="none">
+  <defs>
+    <linearGradient id="ld-bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5CF6" />
+      <stop offset="60%" stop-color="#6D28D9" />
+      <stop offset="100%" stop-color="#4C1D95" />
+    </linearGradient>
+    <linearGradient id="ld-ribbon-top" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="40%" stop-color="#DDD6FE" />
+      <stop offset="100%" stop-color="#A78BFA" />
+    </linearGradient>
+    <linearGradient id="ld-arrow-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#A78BFA" />
+      <stop offset="50%" stop-color="#DDD6FE" />
+      <stop offset="100%" stop-color="#FFFFFF" />
+    </linearGradient>
+    <linearGradient id="ld-ribbon-bot" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C4B5FD" />
+      <stop offset="70%" stop-color="#EDE9FE" />
+      <stop offset="100%" stop-color="#FFFFFF" />
+    </linearGradient>
+    <linearGradient id="ld-text-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C4B5FD" />
+      <stop offset="100%" stop-color="#A78BFA" />
+    </linearGradient>
+  </defs>
+
+  <!-- Logo Icon Group (48x48) -->
+  <g transform="translate(4, 8)">
+    <rect width="48" height="48" rx="14" fill="url(#ld-bg-grad)" />
+    <rect width="48" height="48" rx="14" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+    
+    <!-- Scaled Vector S Glyph -->
+    <g transform="translate(4, 4) scale(0.4)">
+      <circle cx="28" cy="30" r="2.5" fill="#C4B5FD" fill-opacity="0.8" />
+      <circle cx="72" cy="70" r="2.5" fill="#C4B5FD" fill-opacity="0.8" />
+      <path d="M70 27 C62 20, 44 20, 36 27 C28 34, 30 43, 42 47 C48 49, 56 51, 60 54" stroke="url(#ld-ribbon-top)" stroke-width="7.5" stroke-linecap="round" />
+      <path d="M40 46 C34 49, 26 53, 26 62 C26 73, 40 79, 52 79 C64 79, 74 71, 74 62" stroke="url(#ld-ribbon-bot)" stroke-width="7.5" stroke-linecap="round" />
+      <path d="M30 68 L68 28" stroke="url(#ld-arrow-grad)" stroke-width="5" stroke-linecap="round" />
+      <polygon points="72,24 61,25 71,35" fill="url(#ld-arrow-grad)" />
+      <path d="M49 43 Q49 49 43 49 Q49 49 49 55 Q49 49 55 49 Q49 49 49 43 Z" fill="#FFFFFF" />
+      <circle cx="49" cy="49" r="1.8" fill="#7C3AED" />
+    </g>
+  </g>
+
+  <!-- Brand Name Typography -->
+  <text x="64" y="35" font-family="'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="800" font-size="22" letter-spacing="-0.5" fill="#FFFFFF">Sehmi</text>
+  <text x="136" y="35" font-family="'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="800" font-size="22" letter-spacing="-0.5" fill="url(#ld-text-grad)">Digital</text>
+  
+  <!-- Sub-label -->
+  <text x="65" y="49" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="700" font-size="8.5" letter-spacing="2" fill="#DDD6FE">AI MARKETING &amp; GROWTH</text>
+</svg>

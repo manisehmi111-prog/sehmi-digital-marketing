@@ -1,0 +1,29 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <defs>
+    <linearGradient id="fav-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED" />
+      <stop offset="100%" stop-color="#18082D" />
+    </linearGradient>
+    <linearGradient id="fav-ribbon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="60%" stop-color="#DDD6FE" />
+      <stop offset="100%" stop-color="#A78BFA" />
+    </linearGradient>
+    <linearGradient id="fav-arrow" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8B5CF6" />
+      <stop offset="100%" stop-color="#FFFFFF" />
+    </linearGradient>
+  </defs>
+
+  <rect width="60" height="60" x="2" y="2" rx="16" fill="url(#fav-bg)" />
+  <rect width="60" height="60" x="2" y="2" rx="16" stroke="rgba(255,255,255,0.25)" stroke-width="1.2" />
+
+  <!-- High-contrast 'S' mark -->
+  <g transform="translate(6, 6) scale(0.52)">
+    <path d="M70 27 C62 20, 44 20, 36 27 C28 34, 30 43, 42 47 C48 49, 56 51, 60 54" stroke="url(#fav-ribbon)" stroke-width="8" stroke-linecap="round" />
+    <path d="M40 46 C34 49, 26 53, 26 62 C26 73, 40 79, 52 79 C64 79, 74 71, 74 62" stroke="url(#fav-ribbon)" stroke-width="8" stroke-linecap="round" />
+    <path d="M30 68 L68 28" stroke="url(#fav-arrow)" stroke-width="6" stroke-linecap="round" />
+    <polygon points="73,23 60,25 71,36" fill="#FFFFFF" />
+    <path d="M49 43 Q49 49 43 49 Q49 49 49 55 Q49 49 55 49 Q49 49 49 43 Z" fill="#FFFFFF" />
+  </g>
+</svg>
