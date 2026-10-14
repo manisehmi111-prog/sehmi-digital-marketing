@@ -1,4 +1,4 @@
-﻿/**
+/**
  * SEHMI DIGITAL MARKETING - INTERACTIVE ENGINE
  * Modern Vanilla JavaScript (ES6+)
  * Zero external dependencies. Accessible, performant, and responsive.
@@ -625,6 +625,11 @@ function initConsultationModal() {
         return;
       }
 
+      // Track Meta Pixel Conversion Event
+      if (typeof fbq === 'function') {
+        fbq('track', 'Schedule', { content_name: 'Consultation Booking' });
+      }
+
       // Show success in modal
       consultForm.style.display = 'none';
       consultSuccess.style.display = 'block';
@@ -729,6 +734,15 @@ function initContactForm() {
 
       if (clientNameSpan) clientNameSpan.textContent = fields.name.value.trim();
       if (clientEmailSpan) clientEmailSpan.textContent = fields.email.value.trim();
+
+      // Track Meta Pixel Lead Conversion Event
+      if (typeof fbq === 'function') {
+        fbq('track', 'Lead', {
+          content_name: 'Free AI Marketing Audit',
+          currency: 'INR',
+          value: 0.00
+        });
+      }
 
       form.style.display = 'none';
       successState.style.display = 'block';
