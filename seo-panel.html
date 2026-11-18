@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>SEO Control Panel | Sehmi Digital Marketing</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-950: #0D041A;
+      --purple-900: #18082D;
+      --purple-800: #33125D;
+      --purple-700: #581C87;
+      --purple-600: #7C3AED;
+      --purple-500: #8B5CF6;
+      --purple-200: #DDD6FE;
+      --purple-100: #EDE9FE;
+      --purple-50:  #F5F3FF;
+      --white:      #FFFFFF;
+      --gray-50:    #F8FAFC;
+      --gray-100:   #F1F5F9;
+      --gray-200:   #E2E8F0;
+      --gray-300:   #CBD5E1;
+      --gray-400:   #94A3B8;
+      --gray-500:   #64748B;
+      --gray-600:   #475569;
+      --gray-700:   #334155;
+      --gray-800:   #1E293B;
+      --gray-900:   #0F172A;
+      --green-600:  #16A34A;
+      --green-100:  #DCFCE7;
+      --amber-600:  #D97706;
+      --amber-100:  #FEF3C7;
+      --red-600:    #DC2626;
+      --red-100:    #FEE2E2;
+      --radius-sm:  8px;
+      --radius-md:  14px;
+      --radius-lg:  20px;
+      --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-body:    'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --shadow-sm:  0 1px 3px rgba(15, 7, 28, 0.06);
+      --shadow-md:  0 6px 20px -4px rgba(124, 58, 237, 0.10), 0 2px 6px -2px rgba(15, 7, 28, 0.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      background: #F6F5FB;
+      color: var(--gray-800);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    /* Top Header */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(124, 58, 237, 0.12);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--purple-950);
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.15rem;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--purple-600), var(--purple-900));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .panel-pill {
+      background: var(--purple-100);
+      color: var(--purple-700);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.02em;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .score-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .score-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--green-600);
+    }
+
+    .unsaved-badge {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      background: var(--amber-100);
+      color: var(--amber-600);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 999px;
+    }
+    .unsaved-badge.visible { display: inline-flex; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 9px 16px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--purple-600), #6D28D9);
+      color: var(--white);
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.28);
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(124, 58, 237, 0.36); }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .btn-secondary {
+      background: var(--white);
+      color: var(--gray-700);
+      border-color: var(--gray-200);
+    }
+    .btn-secondary:hover { border-color: var(--purple-500); color: var(--purple-700); background: var(--purple-50); }
+    .btn-soft {
+      background: var(--purple-50);
+      color: var(--purple-700);
+      border-color: var(--purple-200);
+    }
+    .btn-soft:hover { background: var(--purple-100); }
+    .btn-success {
+      background: var(--green-600);
+      color: var(--white);
+    }
+    .btn-success:hover { background: #15803D; }
+    .btn-sm { padding: 6px 12px; font-size: 0.8rem; border-radius: 8px; }
+
+    /* Main Shell Layout */
+    .shell {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr) 410px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* Left Sidebar Navigation */
+    .sidebar {
+      position: sticky;
+      top: 84px;
+      background: var(--white);
+      border: 1px solid rgba(124, 58, 237, 0.10);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--gray-400);
+      padding: 8px 12px 6px;
+    }
+
+    .tab-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 12px;
+      border-radius: 10px;
+      border: none;
+      background: transparent;
+      color: var(--gray-600);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s ease;
+      margin-bottom: 3px;
+    }
+    .tab-btn:hover { background: var(--purple-50); color: var(--purple-700); }
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--purple-600), #6D28D9);
+      color: var(--white);
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+    }
+    .tab-btn svg { flex-shrink: 0; }
+
+    .sidebar-divider {
+      height: 1px;
+      background: var(--gray-100);
+      margin: 10px 8px;
+    }
+
+    .quick-action-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      border: 1px dashed var(--gray-300);
+      background: var(--gray-50);
+      color: var(--gray-600);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: all 0.15s ease;
+    }
+    .quick-action-btn:hover { border-color: var(--purple-500); color: var(--purple-700); background: var(--purple-50); }
+
+    /* Center Editor Panel */
+    .editor-pane {
+      display: none;
+      background: var(--white);
+      border: 1px solid rgba(124, 58, 237, 0.10);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-md);
+    }
+    .editor-pane.active { display: block; }
+
+    .pane-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .pane-header h1 {
+      font-family: var(--font-heading);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--purple-950);
+      margin-bottom: 4px;
+    }
+    .pane-header p {
+      font-size: 0.9rem;
+      color: var(--gray-500);
+    }
+
+    /* Form Controls */
+    .field-group { margin-bottom: 20px; }
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .field-label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 7px;
+    }
+    .field-label {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--gray-800);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .field-hint {
+      font-size: 0.78rem;
+      color: var(--gray-500);
+      margin-top: 6px;
+    }
+
+    .char-counter {
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--gray-100);
+      color: var(--gray-600);
+    }
+    .char-counter.good { background: var(--green-100); color: var(--green-600); }
+    .char-counter.warn { background: var(--amber-100); color: var(--amber-600); }
+    .char-counter.bad  { background: var(--red-100); color: var(--red-600); }
+
+    .meter-track {
+      height: 5px;
+      background: var(--gray-100);
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .meter-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 99px;
+      transition: width 0.2s ease, background 0.2s ease;
+    }
+
+    input[type="text"],
+    input[type="url"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="password"],
+    select,
+    textarea {
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: var(--gray-900);
+      background: var(--gray-50);
+      border: 1.5px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 11px 14px;
+      transition: all 0.18s ease;
+      outline: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      background: var(--white);
+      border-color: var(--purple-600);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.14);
+    }
+    textarea { resize: vertical; min-height: 88px; }
+
+    /* Tag Chips Input */
+    .chips-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      align-items: center;
+      background: var(--gray-50);
+      border: 1.5px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 8px 10px;
+      min-height: 48px;
+      cursor: text;
+    }
+    .chips-box:focus-within {
+      background: var(--white);
+      border-color: var(--purple-600);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.14);
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--purple-100);
+      color: var(--purple-800);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .chip button {
+      border: none;
+      background: none;
+      color: var(--purple-700);
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 0.95rem;
+      line-height: 1;
+      padding: 0 2px;
+    }
+    .chip button:hover { color: var(--red-600); }
+    .chips-input {
+      border: none !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      padding: 4px 6px !important;
+      flex: 1;
+      min-width: 140px;
+      font-size: 0.88rem;
+    }
+
+    /* Toggle Switch */
+    .toggle-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .toggle-card strong { display: block; font-size: 0.92rem; color: var(--gray-900); }
+    .toggle-card span { font-size: 0.8rem; color: var(--gray-500); }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 48px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: var(--gray-300);
+      border-radius: 999px;
+      transition: 0.22s;
+    }
+    .slider:before {
+      content: "";
+      position: absolute;
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background: var(--white);
+      border-radius: 50%;
+      transition: 0.22s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .switch input:checked + .slider { background: var(--purple-600); }
+    .switch input:checked + .slider:before { transform: translateX(22px); }
+
+    /* Asset Picker Grid */
+    .asset-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .asset-option {
+      border: 2px solid var(--gray-200);
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--white);
+      transition: all 0.16s ease;
+      padding: 0;
+      text-align: left;
+    }
+    .asset-option:hover { border-color: var(--purple-400); }
+    .asset-option.selected { border-color: var(--purple-600); box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.16); }
+    .asset-option img {
+      width: 100%;
+      height: 70px;
+      object-fit: cover;
+      display: block;
+      background: var(--purple-900);
+    }
+    .asset-option span {
+      display: block;
+      padding: 6px 8px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--gray-700);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* List Builder (Services / URLs) */
+    .list-items { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+    .list-item-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .icon-btn-remove {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      border: 1px solid var(--gray-200);
+      background: var(--white);
+      color: var(--gray-500);
+      cursor: pointer;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon-btn-remove:hover { border-color: var(--red-600); color: var(--red-600); background: var(--red-100); }
+
+    /* Code Box */
+    .code-box {
+      background: var(--purple-950);
+      color: #E9D5FF;
+      font-family: Consolas, Monaco, 'Courier New', monospace;
+      font-size: 0.8rem;
+      line-height: 1.55;
+      padding: 16px;
+      border-radius: 12px;
+      overflow-x: auto;
+      max-height: 290px;
+      white-space: pre;
+    }
+
+    /* Right Preview Column */
+    .preview-col {
+      position: sticky;
+      top: 84px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .preview-card {
+      background: var(--white);
+      border: 1px solid rgba(124, 58, 237, 0.10);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .preview-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .preview-card-title {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--purple-950);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .device-toggle {
+      display: inline-flex;
+      background: var(--gray-100);
+      border-radius: 8px;
+      padding: 3px;
+    }
+    .device-toggle button {
+      border: none;
+      background: transparent;
+      padding: 4px 10px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--gray-600);
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .device-toggle button.active {
+      background: var(--white);
+      color: var(--purple-700);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Google SERP Mockup */
+    .serp-box {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 14px;
+      font-family: Arial, sans-serif;
+    }
+    .serp-box.mobile { max-width: 330px; margin: 0 auto; }
+    .serp-site-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 6px;
+    }
+    .serp-favicon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--purple-50);
+      border: 1px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .serp-favicon img { width: 16px; height: 16px; }
+    .serp-site-name { font-size: 0.8rem; color: #202124; line-height: 1.2; }
+    .serp-url { font-size: 0.72rem; color: #4D5156; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 260px; }
+    .serp-title {
+      font-size: 1.12rem;
+      color: #1A0DAB;
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 5px;
+      word-break: break-word;
+    }
+    .serp-desc {
+      font-size: 0.84rem;
+      color: #4D5156;
+      line-height: 1.48;
+      word-break: break-word;
+    }
+
+    /* Social OG Card Mockup */
+    .og-card {
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #F0F2F5;
+    }
+    .og-card-img {
+      width: 100%;
+      height: 175px;
+      object-fit: cover;
+      display: block;
+      background: var(--purple-900);
+    }
+    .og-card-body {
+      padding: 12px 14px;
+      background: #F0F2F5;
+      border-top: 1px solid var(--gray-200);
+    }
+    .og-card-domain {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      color: #65676B;
+      letter-spacing: 0.03em;
+      margin-bottom: 3px;
+    }
+    .og-card-title {
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: #050505;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+    .og-card-desc {
+      font-size: 0.8rem;
+      color: #65676B;
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* SEO Audit Checklist */
+    .audit-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .audit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 0.82rem;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: var(--gray-50);
+    }
+    .audit-badge {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .audit-badge.pass { background: var(--green-100); color: var(--green-600); }
+    .audit-badge.warn { background: var(--amber-100); color: var(--amber-600); }
+    .audit-badge.fail { background: var(--red-100); color: var(--red-600); }
+
+    /* Publish Method Cards */
+    .publish-box {
+      border: 1.5px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 18px;
+      background: var(--white);
+    }
+    .publish-box.recommended {
+      border-color: var(--purple-500);
+      background: linear-gradient(180deg, #FAF8FF 0%, #FFFFFF 100%);
+    }
+    .publish-box-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .publish-box h3 {
+      font-family: var(--font-heading);
+      font-size: 1.08rem;
+      color: var(--purple-950);
+    }
+    .tag-rec {
+      background: var(--purple-600);
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+      text-transform: uppercase;
+    }
+
+    .status-log {
+      display: none;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+    .status-log.info { display: block; background: var(--purple-50); color: var(--purple-800); border: 1px solid var(--purple-200); }
+    .status-log.success { display: block; background: var(--green-100); color: #166534; border: 1px solid #86EFAC; }
+    .status-log.error { display: block; background: var(--red-100); color: #991B1B; border: 1px solid #FCA5A5; }
+
+    .info-callout {
+      background: var(--purple-50);
+      border: 1px solid var(--purple-200);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.83rem;
+      color: var(--purple-900);
+      margin-bottom: 18px;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+      background: var(--purple-950);
+      color: var(--white);
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      box-shadow: 0 12px 30px rgba(13, 4, 26, 0.35);
+      transform: translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s ease;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1180px) {
+      .shell { grid-template-columns: 210px minmax(0, 1fr); }
+      .preview-col { position: static; grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 820px) {
+      .topbar { padding: 12px 16px; }
+      .shell { grid-template-columns: 1fr; padding: 16px; gap: 16px; }
+      .sidebar {
+        position: static;
+        display: flex;
+        overflow-x: auto;
+        gap: 6px;
+        padding: 8px;
+      }
+      .nav-label, .sidebar-divider, .quick-action-btn { display: none; }
+      .tab-btn { width: auto; white-space: nowrap; margin-bottom: 0; padding: 9px 12px; font-size: 0.84rem; }
+      .editor-pane { padding: 20px 16px; }
+      .field-row { grid-template-columns: 1fr; }
+      .preview-col { grid-template-columns: 1fr; }
+      .asset-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Header -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <a href="index.html" class="brand-link">
+        <div class="brand-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 100 100" fill="none">
+            <path d="M70 27 C62 20, 44 20, 36 27 C28 34, 30 43, 42 47 C48 49, 56 51, 60 54" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+            <path d="M40 46 C34 49, 26 53, 26 62 C26 73, 40 79, 52 79 C64 79, 74 71, 74 62" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+            <path d="M30 68 L68 28" stroke="#DDD6FE" stroke-width="6" stroke-linecap="round"/>
+            <polygon points="73,23 60,25 71,36" fill="#FFFFFF"/>
+          </svg>
+        </div>
+        <span>Sehmi Digital</span>
+      </a>
+      <span class="panel-pill">SEO Control Panel</span>
+    </div>
+
+    <div class="topbar-right">
+      <span id="unsaved-badge" class="unsaved-badge">Unsaved Edits</span>
+      <div class="score-pill" title="Overall SEO Health Score">
+        <span id="header-score-dot" class="score-dot"></span>
+        <span>SEO Score: <strong id="header-score-val">--</strong>/100</span>
+      </div>
+      <a href="https://sehmidigitals.online/" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">View Live Site &nearr;</a>
+      <button type="button" id="top-publish-btn" class="btn btn-primary btn-sm">Publish / Save Changes</button>
+    </div>
+  </header>
+
+  <!-- Main Workspace -->
+  <main class="shell">
+    <!-- Left Navigation -->
+    <aside class="sidebar" aria-label="SEO Sections">
+      <div class="nav-label">SEO Editor</div>
+      <button type="button" class="tab-btn active" data-tab="basic">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Basic SEO
+      </button>
+      <button type="button" class="tab-btn" data-tab="social">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Social Share
+      </button>
+      <button type="button" class="tab-btn" data-tab="tracking">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Verifications &amp; Pixels
+      </button>
+      <button type="button" class="tab-btn" data-tab="schema">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        Business Schema
+      </button>
+      <button type="button" class="tab-btn" data-tab="sitemap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Sitemap &amp; Robots
+      </button>
+
+      <div class="sidebar-divider"></div>
+      <div class="nav-label">Go Live</div>
+      <button type="button" class="tab-btn" data-tab="publish">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Publish &amp; Export
+      </button>
+
+      <div class="sidebar-divider"></div>
+      <button type="button" id="import-json-trigger" class="quick-action-btn">Import seo-config.json</button>
+      <input type="file" id="import-json-file" accept=".json" style="display:none;">
+      <button type="button" id="reset-defaults-btn" class="quick-action-btn">Reload Live Config</button>
+    </aside>
+
+    <!-- Center Editor Panes -->
+    <section>
+      <!-- TAB 1: BASIC SEO -->
+      <div id="pane-basic" class="editor-pane active">
+        <div class="pane-header">
+          <div>
+            <h1>Basic SEO &amp; Search Listing</h1>
+            <p>Control how your website appears on Google Search and what keywords you rank for.</p>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-label-row">
+            <label for="basic-title" class="field-label">SEO Page Title</label>
+            <span id="title-counter" class="char-counter">0 / 60 chars</span>
+          </div>
+          <input type="text" id="basic-title" placeholder="e.g. Sehmi Digital Marketing | AI-Powered Digital Marketing">
+          <div class="meter-track"><div id="title-meter" class="meter-fill"></div></div>
+          <p class="field-hint">Best length: 50–60 characters. Put your primary service and brand name here.</p>
+        </div>
+
+        <div class="field-group">
+          <div class="field-label-row">
+            <label for="basic-desc" class="field-label">Meta Description</label>
+            <span id="desc-counter" class="char-counter">0 / 160 chars</span>
+          </div>
+          <textarea id="basic-desc" rows="3" placeholder="Write a compelling summary of your services with a call-to-action..."></textarea>
+          <div class="meter-track"><div id="desc-meter" class="meter-fill"></div></div>
+          <p class="field-hint">Best length: 120–160 characters. This text shows below your title in Google results.</p>
+        </div>
+
+        <div class="field-group">
+          <div class="field-label-row">
+            <label for="keywords-input" class="field-label">Focus Keywords</label>
+            <span id="keywords-count" class="char-counter">0 keywords</span>
+          </div>
+          <div id="keywords-chips-box" class="chips-box">
+            <input type="text" id="keywords-input" class="chips-input" placeholder="Type a keyword and press Enter...">
+          </div>
+          <p class="field-hint">Type a keyword and press <strong>Enter</strong> or comma (<strong>,</strong>) to add. Click <strong>&times;</strong> to remove.</p>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="basic-canonical" class="field-label">Canonical URL</label>
+            <input type="url" id="basic-canonical" placeholder="https://sehmidigitals.online/">
+            <p class="field-hint">Your official domain URL (prevents duplicate URL issues).</p>
+          </div>
+          <div class="field-group">
+            <label for="basic-author" class="field-label">Author / Brand Name</label>
+            <input type="text" id="basic-author" placeholder="Sehmi Digital Marketing">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="basic-robots" class="field-label">Search Engine Indexing</label>
+            <select id="basic-robots">
+              <option value="index, follow">Index &amp; Follow (Recommended - Visible on Google)</option>
+              <option value="noindex, follow">Noindex, Follow (Hide from Google)</option>
+              <option value="noindex, nofollow">Noindex, Nofollow (Private / Maintenance)</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="basic-theme-color" class="field-label">Mobile Browser Theme Color</label>
+            <input type="text" id="basic-theme-color" placeholder="#18082D">
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: SOCIAL SHARE -->
+      <div id="pane-social" class="editor-pane">
+        <div class="pane-header">
+          <div>
+            <h1>Social Share Preview (Open Graph &amp; Twitter)</h1>
+            <p>Customize the card image, title, and summary shown when sharing your link on WhatsApp, Facebook, LinkedIn, or X.</p>
+          </div>
+          <button type="button" id="sync-from-basic-btn" class="btn btn-soft btn-sm">Copy from Basic SEO</button>
+        </div>
+
+        <div class="field-group">
+          <label for="social-og-title" class="field-label">Social Share Title (og:title)</label>
+          <input type="text" id="social-og-title">
+        </div>
+
+        <div class="field-group">
+          <label for="social-og-desc" class="field-label">Social Share Description (og:description)</label>
+          <textarea id="social-og-desc" rows="3"></textarea>
+        </div>
+
+        <div class="field-group">
+          <label for="social-og-image" class="field-label">Social Share Image URL (og:image)</label>
+          <input type="url" id="social-og-image" placeholder="https://sehmidigitals.online/assets/logo-concept-lockup.jpg">
+          <p class="field-hint">Quick pick from your website brand assets (recommended size: 1200 &times; 630 px):</p>
+          <div class="asset-grid" id="og-asset-picker">
+            <button type="button" class="asset-option" data-url="https://sehmidigitals.online/assets/logo-concept-lockup.jpg">
+              <img src="assets/logo-concept-lockup.jpg" alt="Brand Lockup">
+              <span>Brand Lockup</span>
+            </button>
+            <button type="button" class="asset-option" data-url="https://sehmidigitals.online/assets/logo-concept-neural.jpg">
+              <img src="assets/logo-concept-neural.jpg" alt="Neural Emblem">
+              <span>Neural Emblem</span>
+            </button>
+            <button type="button" class="asset-option" data-url="https://sehmidigitals.online/assets/logo-concept-ribbon.jpg">
+              <img src="assets/logo-concept-ribbon.jpg" alt="Ribbon Logo">
+              <span>Ribbon Logo</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="social-twitter-card" class="field-label">Twitter / X Card Style</label>
+            <select id="social-twitter-card">
+              <option value="summary_large_image">Large Image Card (Recommended)</option>
+              <option value="summary">Compact Summary Card</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="social-twitter-handle" class="field-label">Twitter / X Handle (Optional)</label>
+            <input type="text" id="social-twitter-handle" placeholder="@sehmidigitals">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="social-twitter-title" class="field-label">Twitter / X Title</label>
+          <input type="text" id="social-twitter-title">
+        </div>
+
+        <div class="field-group">
+          <label for="social-twitter-desc" class="field-label">Twitter / X Description</label>
+          <textarea id="social-twitter-desc" rows="2"></textarea>
+        </div>
+      </div>
+
+      <!-- TAB 3: VERIFICATIONS & TRACKING -->
+      <div id="pane-tracking" class="editor-pane">
+        <div class="pane-header">
+          <div>
+            <h1>Verifications &amp; Analytics Tracking</h1>
+            <p>Easily paste Google Search Console, Meta Domain Verification, Meta Pixel, or Google Analytics codes — no HTML coding needed.</p>
+          </div>
+        </div>
+
+        <div class="info-callout">
+          <strong>Smart Paste Enabled:</strong> For Google or Meta verification, you can paste either the <strong>full <code>&lt;meta ...&gt;</code> tag</strong> OR just the <strong>verification code</strong>. This panel cleans it automatically.
+        </div>
+
+        <div class="toggle-card">
+          <div>
+            <strong>Meta Pixel Tracking (Facebook &amp; Instagram Ads)</strong>
+            <span>Tracks PageView, Lead, and Schedule conversion events automatically.</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="track-pixel-enabled" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="track-pixel-id" class="field-label">Meta Pixel ID</label>
+            <input type="text" id="track-pixel-id" placeholder="1566486118088482">
+            <p class="field-hint">Numeric Pixel ID from Meta Events Manager.</p>
+          </div>
+          <div class="field-group">
+            <label for="verify-facebook" class="field-label">Meta Domain Verification</label>
+            <input type="text" id="verify-facebook" placeholder="Paste code or <meta name='facebook-domain-verification'...>">
+            <p class="field-hint">From Meta Business Settings &rarr; Brand Safety &rarr; Domains.</p>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="verify-google" class="field-label">Google Search Console Verification</label>
+            <input type="text" id="verify-google" placeholder="Paste code or <meta name='google-site-verification'...>">
+            <p class="field-hint">From Google Search Console &rarr; HTML tag verification.</p>
+          </div>
+          <div class="field-group">
+            <label for="verify-bing" class="field-label">Bing Webmaster Verification (Optional)</label>
+            <input type="text" id="verify-bing" placeholder="Paste code or <meta name='msvalidate.01'...>">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="track-ga4-id" class="field-label">Google Analytics 4 (GA4) Measurement ID</label>
+            <input type="text" id="track-ga4-id" placeholder="G-XXXXXXXXXX">
+            <p class="field-hint">Starts with <code>G-</code>. Leave blank if not using GA4 yet.</p>
+          </div>
+          <div class="field-group">
+            <label for="track-gtm-id" class="field-label">Google Tag Manager ID (Optional)</label>
+            <input type="text" id="track-gtm-id" placeholder="GTM-XXXXXXX">
+            <p class="field-hint">Starts with <code>GTM-</code>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: BUSINESS SCHEMA (JSON-LD) -->
+      <div id="pane-schema" class="editor-pane">
+        <div class="pane-header">
+          <div>
+            <h1>Business Schema (Structured Data)</h1>
+            <p>Helps Google understand your agency name, services, location, and contact details for rich search results.</p>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="schema-name" class="field-label">Business Name</label>
+            <input type="text" id="schema-name">
+          </div>
+          <div class="field-group">
+            <label for="schema-type" class="field-label">Business Schema Type</label>
+            <select id="schema-type">
+              <option value="ProfessionalService">ProfessionalService (Agency)</option>
+              <option value="LocalBusiness">LocalBusiness</option>
+              <option value="Organization">Organization</option>
+              <option value="MarketingAgency">MarketingAgency</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="schema-desc" class="field-label">Business Description</label>
+          <textarea id="schema-desc" rows="2"></textarea>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="schema-phone" class="field-label">Business Phone (Optional)</label>
+            <input type="tel" id="schema-phone" placeholder="+91 98765 43210">
+          </div>
+          <div class="field-group">
+            <label for="schema-email" class="field-label">Business Email (Optional)</label>
+            <input type="email" id="schema-email" placeholder="hello@sehmidigitals.online">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="schema-city" class="field-label">City / Locality (Optional)</label>
+            <input type="text" id="schema-city" placeholder="e.g. Chandigarh / Ludhiana">
+          </div>
+          <div class="field-group">
+            <label for="schema-country" class="field-label">Country Code</label>
+            <input type="text" id="schema-country" placeholder="IN">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="schema-area" class="field-label">Service Area</label>
+            <input type="text" id="schema-area" placeholder="Global / India">
+          </div>
+          <div class="field-group">
+            <label for="schema-price" class="field-label">Price Range</label>
+            <select id="schema-price">
+              <option value="$">$ (Budget-Friendly)</option>
+              <option value="$$">$$ (Standard Agency)</option>
+              <option value="$$$">$$$ (Premium)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="knows-input" class="field-label">Areas of Expertise (knowsAbout)</label>
+          <div id="knows-chips-box" class="chips-box">
+            <input type="text" id="knows-input" class="chips-input" placeholder="Add topic and press Enter...">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Key Services Listed in Schema</label>
+          <div id="schema-services-list" class="list-items"></div>
+          <button type="button" id="add-service-btn" class="btn btn-soft btn-sm">+ Add Service</button>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Generated JSON-LD Preview</label>
+          <pre id="schema-preview-code" class="code-box"></pre>
+        </div>
+      </div>
+
+      <!-- TAB 5: SITEMAP & ROBOTS -->
+      <div id="pane-sitemap" class="editor-pane">
+        <div class="pane-header">
+          <div>
+            <h1>Sitemap.xml &amp; Robots.txt</h1>
+            <p>Keep your search engine crawl rules and XML sitemap clean for Google Search Console.</p>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="sitemap-domain" class="field-label">Site Domain</label>
+            <input type="url" id="sitemap-domain" placeholder="https://sehmidigitals.online">
+          </div>
+          <div class="field-group">
+            <div class="field-label-row">
+              <label for="sitemap-lastmod" class="field-label">Last Updated Date</label>
+              <button type="button" id="set-today-btn" class="btn btn-soft btn-sm" style="padding:2px 8px; font-size:0.74rem;">Set Today</button>
+            </div>
+            <input type="date" id="sitemap-lastmod">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="sitemap-freq" class="field-label">Change Frequency</label>
+            <select id="sitemap-freq">
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly (Recommended)</option>
+              <option value="monthly">Monthly</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="sitemap-priority" class="field-label">Homepage Priority</label>
+            <select id="sitemap-priority">
+              <option value="1.0">1.0 (Highest)</option>
+              <option value="0.9">0.9</option>
+              <option value="0.8">0.8</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Additional Pages in Sitemap (Optional)</label>
+          <div id="sitemap-extra-list" class="list-items"></div>
+          <button type="button" id="add-sitemap-url-btn" class="btn btn-soft btn-sm">+ Add Page Path (e.g. /services.html)</button>
+        </div>
+
+        <div class="toggle-card">
+          <div>
+            <strong>Allow Search Engines to Crawl Website (robots.txt)</strong>
+            <span>Keep ON so Google &amp; Bing can index your website. <code>/seo-panel.html</code> stays protected.</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="robots-allow-all" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <div class="field-label-row">
+              <label class="field-label">Generated sitemap.xml</label>
+              <button type="button" id="dl-sitemap-btn" class="btn btn-secondary btn-sm">Download</button>
+            </div>
+            <pre id="sitemap-preview-code" class="code-box"></pre>
+          </div>
+          <div class="field-group">
+            <div class="field-label-row">
+              <label class="field-label">Generated robots.txt</label>
+              <button type="button" id="dl-robots-btn" class="btn btn-secondary btn-sm">Download</button>
+            </div>
+            <pre id="robots-preview-code" class="code-box"></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 6: PUBLISH & EXPORT -->
+      <div id="pane-publish" class="editor-pane">
+        <div class="pane-header">
+          <div>
+            <h1>Publish Your SEO Changes Live</h1>
+            <p>Choose the easiest way to apply your edits to <strong>sehmidigitals.online</strong>.</p>
+          </div>
+        </div>
+
+        <!-- Method 1: GitHub Direct Publish -->
+        <div class="publish-box recommended">
+          <div class="publish-box-head">
+            <h3>Option 1: One-Click Live Publish (Directly to GitHub Pages)</h3>
+            <span class="tag-rec">Easiest Online</span>
+          </div>
+          <p style="font-size:0.86rem; color:var(--gray-600); margin-bottom:14px;">
+            Updates <code>index.html</code>, <code>seo-config.json</code>, <code>sitemap.xml</code>, and <code>robots.txt</code> directly on your live website from any browser (laptop or mobile).
+          </p>
+
+          <div class="field-row">
+            <div class="field-group" style="margin-bottom:12px;">
+              <label for="gh-repo" class="field-label">GitHub Repository</label>
+              <input type="text" id="gh-repo" value="manisehmi111-prog/sehmi-digital-marketing">
+            </div>
+            <div class="field-group" style="margin-bottom:12px;">
+              <label for="gh-branch" class="field-label">Branch</label>
+              <input type="text" id="gh-branch" value="main">
+            </div>
+          </div>
+
+          <div class="field-group" style="margin-bottom:12px;">
+            <label for="gh-token" class="field-label">GitHub Personal Access Token</label>
+            <input type="password" id="gh-token" placeholder="github_pat_... or ghp_..." autocomplete="off">
+            <p class="field-hint">
+              Saved only inside your browser (never uploaded). Need a token? Open
+              <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener" style="color:var(--purple-600); font-weight:600;">GitHub Token Settings &nearr;</a>,
+              select repository <strong>sehmi-digital-marketing</strong>, grant <strong>Contents: Read and write</strong>, and paste it here once.
+            </p>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+            <button type="button" id="publish-github-btn" class="btn btn-primary">
+              Publish Live to sehmidigitals.online
+            </button>
+            <button type="button" id="clear-token-btn" class="btn btn-secondary btn-sm">Clear Saved Token</button>
+          </div>
+          <div id="github-status-log" class="status-log"></div>
+        </div>
+
+        <!-- Method 2: Save Directly to Local Folder / One-Click Windows Sync -->
+        <div class="publish-box">
+          <div class="publish-box-head">
+            <h3>Option 2: Save to Your Computer (No Token Needed)</h3>
+          </div>
+          <p style="font-size:0.86rem; color:var(--gray-600); margin-bottom:14px;">
+            Save your updated SEO config to your PC, then double-click <code>Update-SEO-Live.bat</code> inside your <code>sehmi-digital-marketing</code> folder to push live automatically using your existing GitHub login!
+          </p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button type="button" id="save-local-folder-btn" class="btn btn-success">Save Directly to Website Folder</button>
+            <button type="button" id="download-config-btn" class="btn btn-secondary">Download seo-config.json</button>
+          </div>
+          <div id="local-status-log" class="status-log"></div>
+        </div>
+
+        <!-- Method 3: Copy Generated SEO HTML Block -->
+        <div class="publish-box">
+          <div class="publish-box-head">
+            <h3>Option 3: Copy Generated &lt;head&gt; SEO Code</h3>
+            <button type="button" id="copy-head-btn" class="btn btn-soft btn-sm">Copy HTML</button>
+          </div>
+          <pre id="head-html-preview" class="code-box"></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Live Preview Column -->
+    <aside class="preview-col" aria-label="Live Previews & SEO Audit">
+      <!-- Live Google Preview -->
+      <div class="preview-card">
+        <div class="preview-card-head">
+          <div class="preview-card-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Google Search Preview
+          </div>
+          <div class="device-toggle" role="group" aria-label="Preview Device">
+            <button type="button" class="active" data-device="desktop">Desktop</button>
+            <button type="button" data-device="mobile">Mobile</button>
+          </div>
+        </div>
+        <div id="serp-preview-box" class="serp-box">
+          <div class="serp-site-row">
+            <div class="serp-favicon">
+              <img src="assets/favicon.svg" alt="">
+            </div>
+            <div>
+              <div id="prev-serp-brand" class="serp-site-name">Sehmi Digital Marketing</div>
+              <div id="prev-serp-url" class="serp-url">https://sehmidigitals.online/</div>
+            </div>
+          </div>
+          <div id="prev-serp-title" class="serp-title"></div>
+          <div id="prev-serp-desc" class="serp-desc"></div>
+        </div>
+      </div>
+
+      <!-- Live Social Share Card -->
+      <div class="preview-card">
+        <div class="preview-card-head">
+          <div class="preview-card-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            WhatsApp / Facebook Share Card
+          </div>
+        </div>
+        <div class="og-card">
+          <img id="prev-og-img" class="og-card-img" src="assets/logo-concept-lockup.jpg" alt="Social preview">
+          <div class="og-card-body">
+            <div id="prev-og-domain" class="og-card-domain">SEHMIDIGITALS.ONLINE</div>
+            <div id="prev-og-title" class="og-card-title"></div>
+            <div id="prev-og-desc" class="og-card-desc"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live SEO Health Audit -->
+      <div class="preview-card">
+        <div class="preview-card-head">
+          <div class="preview-card-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Live SEO Health Checklist
+          </div>
+          <strong id="audit-score-label" style="font-size:0.86rem; color:var(--purple-700);">--/100</strong>
+        </div>
+        <ul id="seo-audit-list" class="audit-list"></ul>
+      </div>
+    </aside>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="seo-panel.js"></script>
+</body>
+</html>

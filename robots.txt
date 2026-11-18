@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /seo-panel.html
+
+Sitemap: https://sehmidigitals.online/sitemap.xml

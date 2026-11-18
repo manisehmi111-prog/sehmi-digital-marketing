@@ -1,0 +1,81 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-11-18",
+  "basic": {
+    "title": "Sehmi Digital Marketing | AI-Powered Digital Marketing & Brand Promotion",
+    "description": "Sehmi Digital Marketing provides AI-powered digital marketing, online brand promotion, and ongoing support customized to your business goals. Get your free AI audit today.",
+    "keywords": [
+      "AI digital marketing",
+      "AI digital marketing services",
+      "digital marketing services",
+      "online brand promotion",
+      "AI marketing",
+      "digital marketing for businesses",
+      "online business growth"
+    ],
+    "author": "Sehmi Digital Marketing",
+    "canonicalUrl": "https://sehmidigitals.online/",
+    "robots": "index, follow",
+    "themeColor": "#18082D"
+  },
+  "social": {
+    "ogType": "website",
+    "ogTitle": "Sehmi Digital Marketing | Smart AI. Powerful Marketing. Real Growth.",
+    "ogDescription": "AI-powered digital marketing strategies designed around your business to help you get discovered, reach consumers, and grow online with long-term ongoing support.",
+    "ogImage": "https://sehmidigitals.online/assets/logo-concept-lockup.jpg",
+    "twitterCard": "summary_large_image",
+    "twitterTitle": "Sehmi Digital Marketing | AI-Powered Digital Marketing",
+    "twitterDescription": "Customized AI-powered marketing and brand promotion with ongoing maintenance and support.",
+    "twitterHandle": ""
+  },
+  "verifications": {
+    "googleSiteVerification": "",
+    "facebookDomainVerification": "",
+    "bingVerification": ""
+  },
+  "tracking": {
+    "metaPixelEnabled": true,
+    "metaPixelId": "1566486118088482",
+    "ga4Id": "",
+    "gtmId": ""
+  },
+  "schema": {
+    "type": "ProfessionalService",
+    "name": "Sehmi Digital Marketing",
+    "description": "AI-powered digital marketing and online brand promotion services customized to business needs with long-term ongoing support.",
+    "url": "https://sehmidigitals.online",
+    "logo": "https://sehmidigitals.online/assets/logo.svg",
+    "priceRange": "$$",
+    "areaServed": "Global",
+    "telephone": "",
+    "email": "",
+    "addressLocality": "",
+    "addressCountry": "IN",
+    "knowsAbout": [
+      "AI Digital Marketing",
+      "Search Engine Optimization",
+      "Online Brand Promotion",
+      "Social Media Marketing",
+      "AI Content Strategy",
+      "Marketing Automation"
+    ],
+    "services": [
+      "Free AI Marketing Audit",
+      "Ongoing Maintenance & Marketing Support"
+    ]
+  },
+  "sitemap": {
+    "domain": "https://sehmidigitals.online",
+    "changefreq": "weekly",
+    "priority": "1.0",
+    "lastmod": "2026-11-18",
+    "extraUrls": []
+  },
+  "robotsTxt": {
+    "allowAll": true,
+    "disallowPaths": [
+      "/seo-panel.html"
+    ],
+    "customRules": ""
+  }
+}
